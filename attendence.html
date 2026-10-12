@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendAI | Attendance Management System</title>
+
+    <link rel="stylesheet" href="attendence.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">A</span>
+            <div>
+                <h2>AttendAI</h2>
+                <p>Smart Attendance</p>
+            </div>
+        </div>
+
+        <nav class="navigation">
+            <button class="nav-link active" data-page="dashboard">
+                🏠 Dashboard
+            </button>
+
+            <button class="nav-link" data-page="students">
+                👨‍🎓 Students
+            </button>
+
+            <button class="nav-link" data-page="attendance">
+                📋 Attendance
+            </button>
+
+            <button class="nav-link" data-page="reports">
+                📊 Reports
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>AttendAI v1.0</p>
+            <small>Attendance made smarter.</small>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="topbar">
+            <div>
+                <h1 id="pageTitle">Dashboard</h1>
+                <p>Welcome back! Manage your classroom attendance.</p>
+            </div>
+
+            <div class="profile">
+                <div class="profile-avatar">A</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Admin Account</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Page -->
+        <section id="dashboard" class="page-section active">
+
+            <div class="welcome-card">
+                <div>
+                    <h2>Welcome to AttendAI 👋</h2>
+                    <p>Manage students, record attendance, and view reports in one place.</p>
+                </div>
+                <button class="primary-button" data-go="attendance">
+                    Take Attendance →
+                </button>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">👨‍🎓</div>
+                    <p>Total Students</p>
+                    <h2 id="totalStudents">0</h2>
+                    <small>Registered students</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✅</div>
+                    <p>Present Today</p>
+                    <h2 id="presentToday">0</h2>
+                    <small>Students present today</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">❌</div>
+                    <p>Absent Today</p>
+                    <h2 id="absentToday">0</h2>
+                    <small>Students absent today</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">📈</div>
+                    <p>Attendance Rate</p>
+                    <h2 id="attendanceRate">0%</h2>
+                    <small>Today's attendance</small>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <div class="section-heading">
+                    <div>
+                        <h2>Recent Students</h2>
+                        <p>Recently registered students</p>
+                    </div>
+
+                    <button class="secondary-button" data-go="students">
+                        View All
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="recentStudentsBody">
+                            <tr>
+                                <td colspan="4" class="empty-message">
+                                    No students registered yet.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Students Page -->
+        <section id="students" class="page-section">
+
+            <div class="content-card">
+                <div class="section-heading">
+                    <div>
+                        <h2>Student Management</h2>
+                        <p>Add and manage student details.</p>
+                    </div>
+                </div>
+
+                <form id="student-form" class="student-form">
+
+                    <div class="form-group">
+                        <label for="student-id">Student ID</label>
+                        <input
+                            type="text"
+                            id="student-id"
+                            placeholder="Enter student ID"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-name">Student Name</label>
+                        <input
+                            type="text"
+                            id="student-name"
+                            placeholder="Enter student name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" required>
+                            <option value="">Select department</option>
+                            <option value="B.tech">B.tech</option>
+                            <option value="B.Com">B.Com</option>
+                            <option value="B.Sc">B.Sc</option>
+                            <option value="B.A">B.A</option>
+                            <option value="BBA">BBA</option>
+                            <option value="BCA">BCA</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <select id="year" required>
+                            <option value="">Select year</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        + Add Student
+                    </button>
+
+                </form>
+            </div>
+
+            <div class="content-card">
+                <div class="section-heading">
+                    <div>
+                        <h2>Registered Students</h2>
+                        <p>All students in the system</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Year</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentsTableBody">
+                            <tr>
+                                <td colspan="5" class="empty-message">
+                                    No students registered yet.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Attendance Page -->
+        <section id="attendance" class="page-section">
+
+            <div class="content-card">
+                <div class="section-heading">
+                    <div>
+                        <h2>Mark Attendance</h2>
+                        <p>Select a date and mark each student's attendance.</p>
+                    </div>
+                </div>
+
+                <div class="attendance-controls">
+                    <div class="form-group">
+                        <label for="attendanceDate">Attendance Date</label>
+                        <input type="date" id="attendanceDate">
+                    </div>
+
+                    <button
+                        type="button"
+                        id="loadAttendanceBtn"
+                        class="secondary-button"
+                    >
+                        Load Attendance
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Attendance Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="attendanceList">
+                            <tr>
+                                <td colspan="4" class="empty-message">
+                                    No students available. Add students first.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="saveAttendanceBtn" class="primary-button">
+                        Save Attendance
+                    </button>
+                </div>
+
+                <p id="attendanceMessage" class="message"></p>
+            </div>
+
+        </section>
+
+        <!-- Reports Page -->
+        <section id="reports" class="page-section">
+
+            <div class="content-card">
+                <div class="section-heading">
+                    <div>
+                        <h2>Attendance Reports</h2>
+                        <p>Review attendance records for each student.</p>
+                    </div>
+                </div>
+
+                <div class="attendance-controls">
+                    <div class="form-group">
+                        <label for="reportDate">Select Date</label>
+                        <input type="date" id="reportDate">
+                    </div>
+
+                    <button type="button" id="generateReportBtn" class="primary-button">
+                        Generate Report
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Present Days</th>
+                                <th>Absent Days</th>
+                                <th>Attendance Rate</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reportsTableBody">
+                            <tr>
+                                <td colspan="6" class="empty-message">
+                                    Generate a report to view attendance details.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>© 2026 AttendAI — AI Attendance Management System</p>
+        </footer>
+
+    </main>
+
+    <script type="module" src="attendence.js"></script>
+
+</body>
+</html>
